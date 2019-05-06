@@ -1,0 +1,32 @@
+{
+  "name": "@gyumeijie/is-pojo",
+  "version": "1.0.0",
+  "description": "check whether an object is a Plain Javascript Object",
+  "keywords": [
+    "plain-object",
+    "javascript",
+    "object",
+    "POJO"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": {
+    "name": "gyumeijie",
+    "email": "18170879819@163.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gyumeijie/isPOJO.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Gyumeijie/isPOJO/issues"
+  },
+  "homepage": "https://github.com/Gyumeijie/isPOJO#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.4.4",
+    "jest": "24.7.1"
+  }
+}
