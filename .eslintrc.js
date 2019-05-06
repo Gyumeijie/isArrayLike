@@ -154,8 +154,8 @@ module.exports = {
     'max-len': [
       'error',
       {
-        code: 80,
-        comments: 80,
+        code: 85,
+        comments: 85,
         ignoreTrailingComments: false,
         ignoreUrls: true,
         ignoreStrings: true,

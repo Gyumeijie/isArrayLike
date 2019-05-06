@@ -1,12 +1,12 @@
 {
-  "name": "@gyumeijie/is-pojo",
+  "name": "@gyumeijie/is-array-like",
   "version": "1.0.0",
-  "description": "check whether an object is a Plain Javascript Object",
+  "description": "check whether an object is a array-like Object",
   "keywords": [
-    "plain-object",
-    "javascript",
+    "arrayLike",
+    "array-like",
     "object",
-    "POJO"
+    "array"
   ],
   "main": "index.js",
   "scripts": {
@@ -19,14 +19,18 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Gyumeijie/isPOJO.git"
+    "url": "https://github.com/Gyumeijie/isArrayLike.git"
   },
   "bugs": {
-    "url": "https://github.com/Gyumeijie/isPOJO/issues"
+    "url": "https://github.com/Gyumeijie/isArrayLike/issues"
   },
-  "homepage": "https://github.com/Gyumeijie/isPOJO#readme",
+  "homepage": "https://github.com/Gyumeijie/isArrayLike#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.4.4",
     "jest": "24.7.1"
+  },
+  "dependencies": {
+    "@gyumeijie/get-type-of": "^1.0.1",
+    "@gyumeijie/is-pojo": "^1.0.0"
   }
 }

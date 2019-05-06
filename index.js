@@ -1,33 +1,30 @@
-/*
- * In vanilla JavaScript a POJO (Plain Old JavaScript Object) is the simplest
- * kind of object you could possibly have: a set of key-value pairs, created
- * by the `{} object literal notation` or constructed with `new Object()`
- * reference the jquery.isPlainObject
- */
-
 'use strict';
+const isPlainObject = require('@gyumeijie/is-pojo');
+const getTypeOf = require('@gyumeijie/get-type-of');
 
-const isPlainObject = (obj) => {
-  const hasOwnProperty = Object.prototype.hasOwnProperty;
-  const toString = Object.prototype.toString;
+// Use `getTypeOf` instead of `typeof` in case of `null`
+const isWindow = (obj) => getTypeOf(obj) === 'object' && obj === obj.window;
 
-  // Detect obvious negatives use toString to catch host objects
-  if (obj === null || toString.call(obj) !== '[object Object]') {
-    return false;
-  }
+const isArrayLike = (obj, strict = false) => {
+  const type = getTypeOf(obj);
+  const length = type === 'object' && 'length' in obj && obj.length;
 
-  const proto = Object.getPrototypeOf(obj);
-  // Objects with no prototype (e.g., `Object.create( null )`) are plain
-  if (!proto) {
+  // The function or the window object also has the `length` property
+  if (type === 'function' || isWindow(obj)) return false;
+
+  // Truly Array object
+  if (type === 'array') return true;
+
+  // Plain object with valid `length` property and index keys: [0, ..., length-1]
+  if (strict) {
+    for (let i = 0; i < obj.length; i++) {
+      if (!(i in obj)) return false;
+    }
     return true;
   }
 
-  // Objects with prototype are plain iff constructed by `Object` function
-  const ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
-  return (
-    typeof ctor === 'function' &&
-    hasOwnProperty.toString.call(ctor) === hasOwnProperty.toString.call(Object)
-  );
+  // Plain object with valid `length` property
+  return isPlainObject(obj) && typeof length === 'number' && length >= 0;
 };
 
-module.exports = isPlainObject;
+module.exports = isArrayLike;

@@ -1,34 +1,42 @@
-import isPlainObject from './';
+import isArrayLike from './';
 
 describe('', () => {
-  test('Object created by `Object` constructor or Object literals', () => {
-    expect(isPlainObject({})).toBe(true);
-    expect(isPlainObject(Object.create(null))).toBe(true);
-    expect(isPlainObject(Object.create(Object.prototype))).toBe(true);
-    expect(isPlainObject({ constructor: function Foo() {} })).toBe(true);
+  test('test truly array', () => {
+    expect(isArrayLike([])).toBe(true);
+    expect(isArrayLike([1, 2, 3, 4])).toBe(true);
   });
 
-  test('Object not created by  `Object` constructor or Object literals', () => {
-    expect(isPlainObject(Object.create({}))).toBe(false);
-    expect(isPlainObject('string')).toBe(false);
-    expect(isPlainObject(undefined)).toBe(false);
-    expect(isPlainObject(1)).toBe(false);
-    expect(isPlainObject(() => {})).toBe(false);
-    expect(isPlainObject([])).toBe(false);
-    expect(isPlainObject([1, 2, 3, 4])).toBe(false);
-    expect(isPlainObject(new Date())).toBe(false);
-    expect(isPlainObject(/regexp/)).toBe(false);
+  test('test non-array object', () => {
+    expect(isArrayLike({})).toBe(false);
+    expect(isArrayLike(1)).toBe(false);
+    expect(isArrayLike('string')).toBe(false);
+    expect(isArrayLike(undefined)).toBe(false);
+    expect(isArrayLike(null)).toBe(false);
+    expect(isArrayLike(new Date())).toBe(false);
 
-    class Custom {
-      constructor() {
-        this.name = 'custom';
-      }
-    }
-    expect(isPlainObject(new Custom())).toBe(false);
+    let fn = (arg1, arg2) => {};
+    expect(isArrayLike(fn)).toBe(false);
 
-    function Foo() {
-      this.name = 'foo';
-    }
-    expect(isPlainObject(new Foo())).toBe(false);
+    let re = /regexp/;
+    re.length = 1;
+    expect(isArrayLike(re)).toBe(false);
+
+    let obj = {
+      0: 'zero',
+      2: 'two',
+      3: 'three',
+      length: 3,
+    };
+    expect(isArrayLike(obj)).toBe(true);
+    expect(isArrayLike(obj, true)).toBe(false);
+
+    obj = {
+      0: 'zero',
+      1: 'one',
+      2: 'two',
+      length: 3,
+    };
+    expect(isArrayLike(obj)).toBe(true);
+    expect(isArrayLike(obj, true)).toBe(true);
   });
 });
