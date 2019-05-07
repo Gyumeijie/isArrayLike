@@ -1,6 +1,6 @@
 # isArrayLike [![](https://travis-ci.com/Gyumeijie/isArrayLike.svg?branch=master)](https://travis-ci.com/Gyumeijie/isArrayLike)
 
-> check whether an object is a Plain Javascript Object
+> check whether an object is an array-like object
 
 ## Install
 
@@ -29,8 +29,8 @@ measure how much the obj is similar to the array object, there are three levels:
 
 1: return true iff obj has a valid `length` property and properties: [0, ..., length-1]
 
-2: return true iff obj has and only has a valid `length` property and properties: [0, ..., length-1]
-> obj as such also called `strict array-like object`
+2: return true iff obj has and only has a valid `length` property and properties: [0, ..., length-1],
+obj as such also called `strict array-like object`
 ```
 
 ### strict array-like object
